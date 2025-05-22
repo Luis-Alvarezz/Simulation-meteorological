@@ -10,6 +10,7 @@ export default abstract class State {
         State.currentState = newState;
         State.currentState.enter();
     }
+    // * Para almacenar donde se esta ejecutando el estado:
     public abstract enter(): void;
     public abstract exit():  void;
 }
