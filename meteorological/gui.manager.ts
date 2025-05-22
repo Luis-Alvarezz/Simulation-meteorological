@@ -49,4 +49,4 @@ export class GUIManager {
         const element = document.getElementById(id);
         element.style.display = 'none';
     }
-} 
+}
