@@ -1,6 +1,9 @@
+import State from "./states/state";
+import States from "./states/states";
 import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader";
 import { Color, HemisphereLight, PerspectiveCamera, PMREMGenerator, Scene, WebGLRenderer } from "three";
 import Dioarama from "./classes/diorama";
+import MenuState from "./states/menu.state";
 
 export default class SceneManager {
     public static scene : Scene;
@@ -13,11 +16,12 @@ export default class SceneManager {
         SceneManager.createScene();
         SceneManager.createCamera();
         // SceneManager.createLighs();
+        SceneManager.onReady();
 
         await this.loadHDRI();
 
-        const diorama = new Dioarama(this.scene);
-        diorama.init();
+        // const diorama = new Dioarama(this.scene);
+        // diorama.init();
     }
 
     private static createScene() : void {
@@ -58,6 +62,12 @@ export default class SceneManager {
         const envMap = pmremGenerator.fromEquirectangular(hdriTexture).texture;
         SceneManager.scene.environment = envMap; // ? Asignar el mapa de entorno a la escena, es decir la iluminacion
         SceneManager.scene.background = envMap; // ? Fondo
+    }
 
+    private static onReady() : void {
+        // * Aqui se puede añadir codigo que se ejecute cuando la escena este lista:
+        MenuState.diorama = new Dioarama();
+        State.setCurrent(States.menu);
+        MenuState.diorama.init();
     }
 }
