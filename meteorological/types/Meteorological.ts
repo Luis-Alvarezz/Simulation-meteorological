@@ -4,10 +4,6 @@ import { Scene } from "three";
 export default abstract class Meteorological {
     protected static scene : Scene;
 
-    constructor( scene: Scene) {
-        Meteorological.scene = scene;
-    }
-
     // Métodos abstractos que implementarán las clases hijas:
     public abstract init(...args: Array<any>): void; // * Flojo de funcion que recibe cantidad intedeterminada de argumentos y recibe un arreglo de lo que sea
     public abstract update(...agrs: Array<any>): void;
