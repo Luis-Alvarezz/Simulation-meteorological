@@ -30,6 +30,34 @@
     font-weight: 500;
 }
 
+#panel h2 {
+    font-size: 24px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+#panel h3 {
+    font-size: 18px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.margin-top {
+    margin-top: 20px;
+}
+
+.title-school {
+    font-size: 15px;
+}
+
+.title-class {
+    margin-top: 15px;
+
+}
+
+.size {
+    width: 650px;
+}
+
 @media (max-width: 1180px ) {
     #panel {
         justify-content: flex-start;
