@@ -1,6 +1,6 @@
 import Play from "../classes/play";
 import { GUIManager } from "../gui.manager";
-import PhoenomenonManager from "../phoenomenonManager";
+import PhoenomenonManager from "../Phoenomenon.manager";
 import MenuState from "./menu.state";
 import State from "./state";
 
