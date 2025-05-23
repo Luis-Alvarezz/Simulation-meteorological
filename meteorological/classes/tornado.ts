@@ -2,9 +2,8 @@ import {
     BufferGeometry,
     Float32BufferAttribute,
     Points,
-    PointsMaterial,
-    MathUtils
-} from "three";
+    PointsMaterial
+  } from "three";
 import Meteorological from "../types/Meteorological";
 import SceneManager from "../scene.manager";
 
