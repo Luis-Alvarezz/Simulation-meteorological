@@ -1,3 +1,4 @@
+import PhoenomenonManager from "./Phoenomenon.manager";
 import State from "./states/state";
 import States from "./states/states";
 
@@ -48,5 +49,33 @@ export class GUIManager {
     public static hiddenHTML(id: string) : void {
         const element = document.getElementById(id);
         element.style.display = 'none';
+    }
+
+    public static showPhenomenonMenu(): void {
+        const menu = document.getElementById("menu");
+        menu.textContent = '';
+
+        const rainBtn = this.createButton('lluvia', () => {
+            PhoenomenonManager.showRain();
+        });
+
+        const snowBtn = this.createButton('nieve', () => {
+            PhoenomenonManager.showSnow();
+        });
+
+        const backBtn = this.createButton('regresar', () => {
+            GUIManager.removeMenuButtons();
+            State.setCurrent(States.menu);
+        });
+
+        menu.append(rainBtn, snowBtn, backBtn);
+    }
+
+    private static createButton(text: string, onClick: () => void): HTMLElement  {
+        const button = document.createElement("BUTTON") as HTMLButtonElement;
+        button.className = 'button';
+        button.innerHTML = text;
+        button.onclick = onClick;
+        return button;
     }
 }
