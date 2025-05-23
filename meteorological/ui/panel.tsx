@@ -6,7 +6,7 @@ export default class Panel extends Component {
             <div id="panel">
                 <h3 className="title">Creditos</h3>
                 <div className="text">
-                    <h2>Visalizacion de Fenomenos Meteorologicos</h2>
+                    <h2>Visualización de Fenomenos Meteorologicos</h2>
                     <h3>Proyecto creado por </h3>
                     <ul>
                         <li>
