@@ -15,7 +15,7 @@ export class GUIManager {
 
         const play = document.createElement("BUTTON");
         play.className = 'button';
-        play.innerHTML = 'Visualizar Fenomenos';
+        play.innerHTML = 'Fenomenos Meteorologicos';
         play.onclick = () => {
             State.setCurrent(States.play);
         }
