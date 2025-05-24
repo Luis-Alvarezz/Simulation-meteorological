@@ -58,30 +58,36 @@ export default class Rain extends Meteorological {
 
 
     // * Actualizar la lluvia
-    public update(): void {
+    public update(delta: number): void {
         const position = (Rain.particles.geometry.attributes.position as Float32BufferAttribute).array as Float32Array;
-
+    
         const time = Date.now() * 0.0005;
-
-        // * Mover las particulas hacia abajo:
+    
+        const baseSpeed = 12; // Puedes ajustarlo según se sienta mejor
+    
         for (let i = 0; i < Rain.particleCount; i++) {
-            position[i * 3 + 1] -= 1.8 + Math.random() * 0.6; // * Y - velocidad
-            
-            // * Viento más intenso y consistente (50% más fuerte)
-            position[i * 3] += Math.sin(time + i * 0.1) * 0.35; // Eje X (movimiento lateral)
+            // Caída en Y (dependiente de delta)
+            position[i * 3 + 1] -= 0.5 * delta * baseSpeed; // ? Caida de la lluvia
 
-            // * Ligero movimiento en Z para efecto 3D
-            position[i * 3 + 2] += Math.cos(time * 0.7 + i * 0.05) * 0.15;
-
-            // * Reiniciar la posicion de las particulas cuando salen de la pantalla:
-            if (position[i * 3 + 1] < -15) { // 25% más cerca del límite inferior
-                position[i * 3] = Math.random() * 250 - 125; // Área más amplia
-                position[i * 3 + 1] = Math.random() * 30 + 120; // Altura inicial mayor
-                position[i * 3 + 2] = Math.random() * 250 - 125;
+            // Movimiento en X (viento) - se mantiene igual
+            position[i * 3] += Math.sin(time + i * 0.1) * 0.35 * delta * baseSpeed;
+    
+            // Movimiento lateral (viento) - se mantiene igual
+            position[i * 3] += Math.sin(time + i * 0.1) * 0.35 * delta * baseSpeed;
+    
+            // Movimiento en Z
+            position[i * 3 + 2] += Math.cos(time * 0.7 + i * 0.05) * 0.15 * delta * baseSpeed;
+    
+            // Reposición si cae demasiado
+            if (position[i * 3 + 1] < -15) {
+                position[i * 3] = Math.random() * 300 - 150; // más amplio
+                position[i * 3 + 1] = Math.random() * 40 + 150; // más alto
+                position[i * 3 + 2] = Math.random() * 300 - 150;
             }
         }
-        Rain.particles.geometry.attributes.position.needsUpdate = true; // ? Actualizar la posicion
-    }
+    
+        Rain.particles.geometry.attributes.position.needsUpdate = true;
+    }    
 
 
     // * Limpiar la lluvia

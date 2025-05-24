@@ -7,6 +7,7 @@ export default class RendererManager {
     private static renderer : WebGLRenderer;
     public static canvas : HTMLCanvasElement;
     private static controls: OrbitControls
+    private static lastFrameTime: number = performance.now();
 
 
     private constructor() {
@@ -31,15 +32,21 @@ export default class RendererManager {
     }
 
     // * Metodo 2. Crear el loop:
-    private static renderLoop() : void {
+    private static renderLoop = () : void => {
         requestAnimationFrame(RendererManager.renderLoop);
-
-        RendererManager.controls.update(); // ? Actualizar los controles
-
-        PhoenomenonManager.update(); // ? Actualizar el fenomeno meteorologico
-
-        if (SceneManager.scene && SceneManager.camera)
+    
+        const now = performance.now();
+        const delta = (now - RendererManager.lastFrameTime) / 1000; // delta en segundos
+        RendererManager.lastFrameTime = now;
+    
+        RendererManager.controls.update(); // Actualiza controles de cámara
+    
+        // Actualizar el fenómeno actual (lluvia o nieve)
+        PhoenomenonManager.update(delta);
+    
+        if (SceneManager.scene && SceneManager.camera) {
             RendererManager.renderer.render(SceneManager.scene, SceneManager.camera);
+        }
     }
 
     // * Metodo 3. Renderizar el frame:

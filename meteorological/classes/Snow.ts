@@ -73,6 +73,7 @@ export default class Snow extends Meteorological {
 
     public update(): void {
         const position = (Snow.particles.geometry.attributes.position as Float32BufferAttribute).array;
+        
         const rotation = (Snow.particles.geometry.attributes.rotation as Float32BufferAttribute).array;
         const rotationSpeed = (Snow.particles.geometry.attributes.rotationSpeed as Float32BufferAttribute).array;
         const time = Date.now() * 0.0005;

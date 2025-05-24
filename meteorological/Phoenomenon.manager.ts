@@ -1,5 +1,6 @@
 import Rain from "./classes/Rain";
 import Snow from "./classes/Snow";
+import Wind from "./classes/Wind";
 import SceneManager from "./scene.manager";
 
 export default class PhoenomenonManager {
@@ -17,6 +18,12 @@ export default class PhoenomenonManager {
         this.current.init();
     }
 
+    public static showWind() : void {
+        this.clearCurrent();
+        this.current = new Wind();
+        this.current.init();
+    }
+
     public static clearCurrent() : void {
         if (this.current) {
             this.current.clear();
@@ -24,9 +31,9 @@ export default class PhoenomenonManager {
         }
     }
 
-    public static update() : void {
+    public static update(delta: number): void {
         if (this.current) {
-            this.current.update();
+            this.current.update(delta);
         }
     }
 }
