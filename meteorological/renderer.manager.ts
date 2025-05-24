@@ -1,6 +1,7 @@
 import { Scene, WebGLRenderer, ACESFilmicToneMapping  } from "three";
 import SceneManager from "./scene.manager";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import PhoenomenonManager from "./Phoenomenon.manager";
 
 export default class RendererManager {
     private static renderer : WebGLRenderer;
@@ -34,6 +35,8 @@ export default class RendererManager {
         requestAnimationFrame(RendererManager.renderLoop);
 
         RendererManager.controls.update(); // ? Actualizar los controles
+
+        PhoenomenonManager.update(); // ? Actualizar el fenomeno meteorologico
 
         if (SceneManager.scene && SceneManager.camera)
             RendererManager.renderer.render(SceneManager.scene, SceneManager.camera);

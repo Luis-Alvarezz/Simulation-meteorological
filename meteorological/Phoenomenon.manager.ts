@@ -23,4 +23,10 @@ export default class PhoenomenonManager {
             this.current = null;
         }
     }
+
+    public static update() : void {
+        if (this.current) {
+            this.current.update();
+        }
+    }
 }
