@@ -1,5 +1,6 @@
 import Rain from "./classes/Rain";
 import Snow from "./classes/Snow";
+import Storm from "./classes/Storm";
 import Wind from "./classes/Wind";
 import SceneManager from "./scene.manager";
 
@@ -22,6 +23,12 @@ export default class PhoenomenonManager {
         this.clearCurrent();
         this.current = new Wind();
         this.current.init();
+    }
+    public static async showStorm(): Promise<void> {
+        this.clearCurrent();
+        const storm = new Storm();
+        await storm.init();
+        this.current = storm;
     }
 
     public static clearCurrent() : void {

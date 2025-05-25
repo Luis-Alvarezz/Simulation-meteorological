@@ -67,12 +67,16 @@ export class GUIManager {
             PhoenomenonManager.showWind();
         });
 
+        const stormBtn = this.createButton('tormenta', async () => {
+            await PhoenomenonManager.showStorm();
+        });
+        
         const backBtn = this.createButton('regresar', () => {
             GUIManager.removeMenuButtons();
             State.setCurrent(States.menu);
         });
 
-        menu.append(rainBtn, snowBtn, windBtn, backBtn);
+        menu.append(rainBtn, snowBtn, windBtn, stormBtn, backBtn);
     }
 
     private static createButton(text: string, onClick: () => void): HTMLElement  {

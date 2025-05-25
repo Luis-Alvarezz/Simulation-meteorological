@@ -1,12 +1,23 @@
 import State from "./states/state";
 import States from "./states/states";
 import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader";
-import { Color, HemisphereLight, PerspectiveCamera, PMREMGenerator, Scene, WebGLRenderer } from "three";
+import { Color, HemisphereLight, OrthographicCamera, PerspectiveCamera, PMREMGenerator, Scene, WebGLRenderer } from "three";
 import Dioarama from "./classes/diorama";
 import MenuState from "./states/menu.state";
 
 export default class SceneManager {
-    public static scene : Scene;
+    public static scene: Scene = new Scene();
+
+    // Añade esto para la escena de superposición
+    public static overlayScene: Scene = new Scene();
+    public static overlayCamera: OrthographicCamera = new OrthographicCamera(
+        -1, // left
+         1, // right
+         1, // top
+        -1, // bottom
+         0, // near (o un valor pequeño como 0.1)
+        10  // far (o un valor como 1 o 2, solo necesita contener el plano del flash)
+    )
     public static camera : PerspectiveCamera;
     public static renderer : WebGLRenderer;
 
