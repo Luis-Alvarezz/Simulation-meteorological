@@ -1,4 +1,4 @@
-import { BufferGeometry, Float32BufferAttribute, Points, PointsMaterial, TextureLoader, AdditiveBlending, Color } from "three";
+import { BufferGeometry, Float32BufferAttribute, Points, PointsMaterial, TextureLoader, AdditiveBlending, Color, Texture } from "three";
 import Meteorological from "../types/Meteorological";
 import SceneManager from "../scene.manager";
 
@@ -13,7 +13,13 @@ export default class Snow extends Meteorological {
 
     public async init(): Promise<void> {
         // Cargar textura de copo de nieve
-        const snowFlakeTexture = await this.loadTexture('/textures/snow-preview.png');
+        let snowFlakeTexture: Texture | null = null;
+
+        try {
+            snowFlakeTexture = await this.loadTexture('/textures/snow-preview.png');
+        } catch (e) {
+            console.error("Rain.ts: Failed to load rain texture. Using fallback.", e);
+        }
         
         const geometry = new BufferGeometry();
         const positions = new Float32Array(Snow.particleCount * 3);
@@ -64,6 +70,8 @@ export default class Snow extends Meteorological {
     }
 
     public update(): void {
+        if (!Snow.particles) return;
+        
         const position = (Snow.particles.geometry.attributes.position as Float32BufferAttribute).array;
         
         const rotation = (Snow.particles.geometry.attributes.rotation as Float32BufferAttribute).array;
