@@ -21,7 +21,7 @@ export default class Panel extends Component {
                         </li>
                         <li>
                             <strong>
-                                Dario Emilio Loza Hernandez - NUA 436795
+                                Dario Emilio Hernandez Loza  - NUA 436795
                             </strong>
                         </li>
                     </ul>
