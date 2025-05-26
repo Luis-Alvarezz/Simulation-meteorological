@@ -1,11 +1,4 @@
-import {
-    BufferGeometry,
-    Float32BufferAttribute,
-    Points,
-    PointsMaterial,
-    Texture,
-    TextureLoader
-} from "three";
+import { BufferGeometry, Float32BufferAttribute, Points, PointsMaterial, Texture, TextureLoader } from "three";
 import Meteorological from "../types/Meteorological";
 import SceneManager from "../scene.manager";
 
@@ -19,33 +12,48 @@ export default class Rain extends Meteorological {
     }
 
     public async init(): Promise<void> {
-        let rainTexture: Texture | null = null;
+        let snowFlakeTexture: Texture | null = null; 
+        
         try {
-            rainTexture = await this.loadTexture('/textures/rain-preview.png');
+            snowFlakeTexture = await this.loadTexture('/textures/rain-preview.png');
         } catch (e) {
             console.error("Rain.ts: Failed to load rain texture. Using fallback.", e);
         }
 
         const geometry = new BufferGeometry();
         const positions = new Float32Array(Rain.particleCount * 3);
+        const sizes = new Float32Array(Rain.particleCount);
+        const opacities = new Float32Array(Rain.particleCount);
+        const rotations = new Float32Array(Rain.particleCount);
+        const rotationSpeeds = new Float32Array(Rain.particleCount);
 
         // Modificado para que el rango vertical cubra toda la pantalla
         const spawnWidth = 400;
-        const initialSpawnMinY = 0;       // Desde el suelo
+        const initialSpawnMinY = -100;       // Desde el suelo
         const initialSpawnMaxY = 500;     // Hasta lo más alto visible o más
 
+        // * Posiciones de las particulas
         for (let i = 0; i < Rain.particleCount; i++) {
             positions[i * 3] = (Math.random() - 0.5) * spawnWidth;
             positions[i * 3 + 1] = initialSpawnMinY + Math.random() * (initialSpawnMaxY - initialSpawnMinY);
             positions[i * 3 + 2] = (Math.random() - 0.5) * spawnWidth;
+
+            sizes[i] = Math.random() * 5 + 1; // ? Tamaño
+            opacities[i] = 0.3 + Math.random() * 0.7; // Variación de opacidad
+            rotations[i] = Math.random() * Math.PI * 2; // Rotación inicial
+            rotationSpeeds[i] = (Math.random() - 0.5) * 0.01; // Velocidad de rotación
         }
 
         geometry.setAttribute('position', new Float32BufferAttribute(positions, 3));
+        geometry.setAttribute('size', new Float32BufferAttribute(sizes, 1));
+        geometry.setAttribute('opacity', new Float32BufferAttribute(opacities, 1));
+        geometry.setAttribute('rotation', new Float32BufferAttribute(rotations, 1));
+        geometry.setAttribute('rotationSpeed', new Float32BufferAttribute(rotationSpeeds, 1));
 
         const material = new PointsMaterial({
-            map: rainTexture,
-            color: rainTexture ? 0xffffff : 0x88aadd,
-            size: rainTexture ? 1.2 : 0.15,
+            map: snowFlakeTexture,
+            color: 0x88aadd,
+            size: snowFlakeTexture ? 1.2 : 0.15,
             transparent: true,
             opacity: 0.6,
             sizeAttenuation: true,
@@ -69,10 +77,10 @@ export default class Rain extends Meteorological {
         const windStrengthZ = 10;
 
         // Ahora las gotas caen hasta más abajo
-        const fallLimitY = -25;
+        const fallLimitY = -100;
         const respawnAreaWidth = 400;
-        const respawnMinY = 400;   // Las nuevas gotas nacen desde bien arriba
-        const respawnMaxY = 500;
+        const respawnMinY = 500;   // Las nuevas gotas nacen desde bien arriba
+        const respawnMaxY = 600;
 
         for (let i = 0; i < Rain.particleCount; i++) {
             const fallSpeed = (baseFallSpeed + Math.random() * randomFallVariance) * delta;
