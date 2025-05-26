@@ -1,18 +1,10 @@
-import { 
-    BufferGeometry, 
-    Float32BufferAttribute, 
-    Points, 
-    PointsMaterial, 
-    TextureLoader,
-    AdditiveBlending,
-    Color
-} from "three";
+import { BufferGeometry, Float32BufferAttribute, Points, PointsMaterial, TextureLoader, AdditiveBlending, Color } from "three";
 import Meteorological from "../types/Meteorological";
 import SceneManager from "../scene.manager";
 
 export default class Snow extends Meteorological {
     private static particles: Points;
-    private static particleCount: number = 5000; // Reducido para mejor performance
+    private static particleCount: number = 5000;
     private static textureLoader = new TextureLoader();
 
     constructor() {
@@ -30,7 +22,7 @@ export default class Snow extends Meteorological {
         const rotations = new Float32Array(Snow.particleCount);
         const rotationSpeeds = new Float32Array(Snow.particleCount);
 
-        // Distribución más natural en un volumen 3D
+        // * Distribución más natural en un volumen 3D
         for (let i = 0; i < Snow.particleCount; i++) {
             positions[i * 3] = Math.random() * 400 - 200; // X: -200 a 200
             positions[i * 3 + 1] = Math.random() * 200 - 50; // Y: 50 a 250
