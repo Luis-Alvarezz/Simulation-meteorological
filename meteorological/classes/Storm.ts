@@ -96,7 +96,7 @@
 
             if (this.rainTexture) {
                 materialConfig.map = this.rainTexture;
-                materialConfig.color = 0xffffff; // No teñir la textura si existe
+                materialConfig.color = 0x88aadd; // No teñir la textura si existe
             } else {
                 materialConfig.color = 0xaaaaaa; // Color base si no hay textura
                 materialConfig.size = 1.5;       // Gotas más pequeñas si no hay textura
