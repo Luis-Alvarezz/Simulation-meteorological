@@ -4,7 +4,8 @@ import {
   Points,
   PointsMaterial,
   TextureLoader, // ¡Importar TextureLoader!
-  AdditiveBlending, // Opcional, para un efecto más brillante
+  AdditiveBlending,
+  Texture, // Opcional, para un efecto más brillante
 } from "three";
 import Meteorological from "../types/Meteorological";
 import SceneManager from "../scene.manager";
@@ -28,10 +29,13 @@ export default class Wind extends Meteorological {
   public async init(): Promise<void> { // Cambiado a async para esperar la textura
       // Carga tu textura de partícula de viento
       // Reemplaza '/textures/wind-particle.png' con la ruta a tu textura
-      const windTexture = await this.loadTexture('/textures/wind-particle.png').catch(error => {
-          console.error("Error loading wind texture:", error);
-          return null; // Maneja el error si la textura no carga
-      });
+      let windTexture: Texture | null = null;
+
+      try {
+            windTexture = await this.loadTexture('/textures/wind-particle.png');
+      } catch (error) {
+          console.error("Error loading wind texture -> ", error);
+      }
 
       const geometry = new BufferGeometry();
       const positions = new Float32Array(Wind.particleCount * 3);
