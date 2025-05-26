@@ -1,6 +1,7 @@
 import Rain from "./classes/Rain";
 import Snow from "./classes/Snow";
 import Storm from "./classes/Storm";
+import Tornado from "./classes/tornado";
 import Wind from "./classes/Wind";
 import SceneManager from "./scene.manager";
 
@@ -34,6 +35,12 @@ export default class PhoenomenonManager {
     public static showStorm(): void {
         this.clearCurrent();
         this.current = new Storm();
+        this.current.init();
+    }
+
+    public static showTornado(): void {
+        this.clearCurrent();
+        this.current = new Tornado();
         this.current.init();
     }
 
