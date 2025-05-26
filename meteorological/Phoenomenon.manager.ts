@@ -24,11 +24,17 @@ export default class PhoenomenonManager {
         this.current = new Wind();
         this.current.init();
     }
-    public static async showStorm(): Promise<void> {
+    // public static async showStorm(): Promise<void> {
+    //     this.clearCurrent();
+    //     const storm = new Storm();
+    //     await storm.init();
+    //     this.current = storm;
+    // }
+
+    public static showStorm(): void {
         this.clearCurrent();
-        const storm = new Storm();
-        await storm.init();
-        this.current = storm;
+        this.current = new Storm();
+        this.current.init();
     }
 
     public static clearCurrent() : void {
