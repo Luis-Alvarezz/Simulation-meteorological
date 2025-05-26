@@ -32,16 +32,17 @@ export default class RendererManager {
     }
 
     // * Metodo 2. Crear el loop:
-    private static renderLoop = () : void => {
+    private static renderLoop() : void {
         requestAnimationFrame(RendererManager.renderLoop);
     
+        // * Llamada a animaciones:
         const now = performance.now();
         const delta = (now - RendererManager.lastFrameTime) / 1000; // delta en segundos
         RendererManager.lastFrameTime = now;
     
-        RendererManager.controls.update(); // Actualiza controles de cámara
+        RendererManager.controls.update(); // ? Actualiza controles de cámara
     
-        // Actualizar el fenómeno actual (lluvia o nieve)
+        // *Actualizar el fenómeno actual
         PhoenomenonManager.update(delta);
     
         if (SceneManager.scene && SceneManager.camera) {
