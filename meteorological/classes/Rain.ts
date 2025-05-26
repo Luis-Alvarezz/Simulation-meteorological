@@ -23,9 +23,6 @@ export default class Rain extends Meteorological {
         const geometry = new BufferGeometry();
         const positions = new Float32Array(Rain.particleCount * 3);
         const sizes = new Float32Array(Rain.particleCount);
-        const opacities = new Float32Array(Rain.particleCount);
-        const rotations = new Float32Array(Rain.particleCount);
-        const rotationSpeeds = new Float32Array(Rain.particleCount);
 
         // Modificado para que el rango vertical cubra toda la pantalla
         const spawnWidth = 400;
@@ -37,18 +34,9 @@ export default class Rain extends Meteorological {
             positions[i * 3] = (Math.random() - 0.5) * spawnWidth;
             positions[i * 3 + 1] = initialSpawnMinY + Math.random() * (initialSpawnMaxY - initialSpawnMinY);
             positions[i * 3 + 2] = (Math.random() - 0.5) * spawnWidth;
-
-            sizes[i] = Math.random() * 5 + 1; // ? Tamaño
-            opacities[i] = 0.3 + Math.random() * 0.7; // Variación de opacidad
-            rotations[i] = Math.random() * Math.PI * 2; // Rotación inicial
-            rotationSpeeds[i] = (Math.random() - 0.5) * 0.01; // Velocidad de rotación
         }
 
         geometry.setAttribute('position', new Float32BufferAttribute(positions, 3));
-        geometry.setAttribute('size', new Float32BufferAttribute(sizes, 1));
-        geometry.setAttribute('opacity', new Float32BufferAttribute(opacities, 1));
-        geometry.setAttribute('rotation', new Float32BufferAttribute(rotations, 1));
-        geometry.setAttribute('rotationSpeed', new Float32BufferAttribute(rotationSpeeds, 1));
 
         const material = new PointsMaterial({
             map: snowFlakeTexture,
