@@ -22,7 +22,6 @@ export default class Rain extends Meteorological {
 
         const geometry = new BufferGeometry();
         const positions = new Float32Array(Rain.particleCount * 3);
-        const sizes = new Float32Array(Rain.particleCount);
 
         // Modificado para que el rango vertical cubra toda la pantalla
         const spawnWidth = 400;
