@@ -5,9 +5,14 @@
 - [Three.js](https://threejs.org/)  
 - React + TypeScript  
 - WebGL
+- Next.js
 
   
 # 🚀 How to run the project
 1. :boom: clone repository: git clone https://github.com/Luis-Alvarezz/Simulation-meteorological.git
 2. :shinto_shrine: Install dependences: npm install
 3. :zap: Execute the project: npm run dev 
+
+## 📸 Screenshot  
+![Simulación 3D Meteorológica](assets/3D-Simulation-Screenshot.png)  
+![Simulación 3D Meteorológica](assets/3D-Simulation-Screenshot2.png)  
