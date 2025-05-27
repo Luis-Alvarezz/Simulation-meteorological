@@ -24,7 +24,7 @@ export default class ViewStart extends Meteorological {
     }
 
     public async update() : Promise<void> {
-        // ViewStart.rain.update(delta);
+        // ViewStart.rain.update();
     }
 
     public async clear() : Promise<void> {
