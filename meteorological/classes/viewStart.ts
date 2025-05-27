@@ -9,7 +9,7 @@ export default class ViewStart extends Meteorological {
 
 
     constructor() {
-        super(SceneManager.scene);
+        super();
         ViewStart.rain = new Rain();
     }
 
@@ -24,7 +24,7 @@ export default class ViewStart extends Meteorological {
     }
 
     public async update() : Promise<void> {
-        ViewStart.rain.update();
+        // ViewStart.rain.update(delta);
     }
 
     public async clear() : Promise<void> {
